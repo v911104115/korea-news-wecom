@@ -88,8 +88,8 @@ def digest(items):
              "> 한국시간 오전 10시 기준 · 한국어 원제목 · 언론사 원문"]
     for index, (_, date, title, link, source) in enumerate(items, 1):
         old = " (지난 기사)" if date < NOW - timedelta(hours=24) else ""
-        lines.append(f"{index}. [{title}]({link}){old}\\n> {source} · {date:%m-%d %H:%M} KST")
-    return "\\n\\n".join(lines)
+        lines.append(f"{index}. [{title}]({link}){old}\n> {source} · {date:%m-%d %H:%M} KST")
+    return "\n\n".join(lines)
 
 
 def send(message):
