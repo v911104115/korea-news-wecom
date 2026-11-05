@@ -1,0 +1,19 @@
+name: Korea Chinese News Daily
+on:
+  schedule:
+    - cron: '0 1 * * *' # 10:00 Asia/Seoul (UTC+9)
+  workflow_dispatch:
+jobs:
+  deliver:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install -r requirements.txt
+      - name: Send Korea news to WeCom
+        env:
+          WECOM_WEBHOOK: ${{ secrets.WECOM_WEBHOOK }}
+        run: python news.py
